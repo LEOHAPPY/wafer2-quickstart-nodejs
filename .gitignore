@@ -43,3 +43,6 @@ typings/
 sh/
 # ignore test sdk.config.json
 sdk.config.json
+client/config.js
+server/config.js
+project.config.json
