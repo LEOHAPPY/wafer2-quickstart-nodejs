@@ -157,6 +157,5 @@
     <view class="weui-cell__bd">
       <view class="weui-input" wx:if="{{userAppID>0}}">编号#{{userAppID}}</view>
     </view>
-    <template is="foot" />
   </view>
 </view>
