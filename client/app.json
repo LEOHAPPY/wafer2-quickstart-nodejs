@@ -1,13 +1,25 @@
 {
-  "pages":[
-    "pages/index/index",
-    "pages/addCgi/addCgi"
+  "pages": [
+    "pages/settings/settings",
+    "pages/personList/personList"
   ],
-  "window":{
-    "backgroundColor":"#F6F6F6",
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F6F6F6",
     "navigationBarTitleText": "Wafer Quick Start",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/settings/settings",
+        "text": "settings"
+      },
+      {
+        "pagePath": "pages/personList/personList",
+        "text": "list"
+      }
+    ]
   }
 }

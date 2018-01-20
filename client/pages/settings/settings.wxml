@@ -1,0 +1,162 @@
+
+
+<view class="container">
+  <view class="page-body">
+    <form bindsubmit="formSubmit" bindreset="formReset">
+      <view class="page-section">
+        <view class="weui-cells ">
+
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">昵称</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" type="text" placeholder="" name="userName"></input>
+            </view>
+          </view>
+
+          <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+
+              <view class="weui-cell__hd">
+                <view class="weui-label">性别</view>
+              </view>
+
+              <view class="weui-cell__bd">
+                <picker name="gender" mode="selector" bindchange="bindGenderPickerChange" value="{{genderArray[gIndex]}}" range="{{genderArray}}">
+                  <view class="weui-input">{{genderArray[gIndex]}}</view>
+                </picker>
+              </view>
+
+            </view>
+          </view>
+
+          <view class="page-section-title">身高(米)</view>
+          <view class="body-view">
+            <slider name="height" show-value min='120' max='190' value='150'></slider>
+          </view>
+
+          <!-- <view class="page-section-title">体重(公斤)</view>
+          <view class="body-view">
+            <slider name="weight" show-value min='30' max='200' value='50'></slider>
+          </view> -->
+
+          <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+
+              <view class="weui-cell__hd">
+                <view class="weui-label">出生年月</view>
+              </view>
+
+              <view class="weui-cell__bd">
+                <picker name="birthday" mode="date" value="{{date}}" start="1970-09-01" end="2000-01-01" bindchange="bindDateChange">
+                  <view class="weui-input">{{date}}</view>
+                </picker>
+              </view>
+
+            </view>
+          </view>
+
+          <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+
+              <view class="weui-cell__hd">
+                <view class="weui-label">籍贯</view>
+              </view>
+
+              <view class="weui-cell__bd">
+                <picker name="hometown" mode="region" bindchange="bindRegionChange" value="{{region}}">
+                  <view class="weui-input">{{region[0]}}，{{region[1]}}，{{region[2]}}</view>
+                </picker>
+              </view>
+
+            </view>
+          </view>
+
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">职业</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" type="text" placeholder="" name="career"></input>
+            </view>
+          </view>
+
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">工作地点</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" type="text" placeholder="" name="workplace"></input>
+            </view>
+          </view>
+
+          <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+
+              <view class="weui-cell__hd">
+                <view class="weui-label">学历</view>
+              </view>
+
+              <view class="weui-cell__bd">
+                <picker name="degreeLevel" mode="selector" bindchange="bindDegreeLevelPickerChange" value="{{degreeLevel[dIndex]}}" range="{{degreeLevel}}">
+                  <view class="weui-input">{{degreeLevel[dIndex]}}</view>
+                </picker>
+              </view>
+
+            </view>
+          </view>
+
+          <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+
+              <view class="weui-cell__hd">
+                <view class="weui-label">家中排行</view>
+              </view>
+
+              <view class="weui-cell__bd">
+                <picker name="brothers" mode="selector" bindchange="bindBrothersPickerChange" value="{{brothers[bIndex]}}" range="{{brothers}}">
+                  <view class="weui-input">{{brothers[bIndex]}}</view>
+                </picker>
+              </view>
+            </view>
+          </view>
+
+          <view class="weui-cells weui-cells_after-title">
+            <view class="weui-label">介绍一下自己</view>
+            <view class="textarea-wrp">
+              <textarea style="height: 3em" name="selfIntro" placeholder="爱好/特长/生活态度" />
+            </view>
+          </view>
+
+          <view class="weui-cells">
+            <view class="weui-label">择偶要求</view>
+            <view class="textarea-wrp">
+              <textarea style="height: 3em" name="selfWish" placeholder="心中她/他的样子" />
+            </view>
+          </view>
+
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">微信号</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" type="text" placeholder="仅显示给红娘" name="wechatID">{{weichatID}}</input>
+            </view>
+          </view>
+
+
+          <view class="btn-area">
+            <button formType="submit" type="primary" wx:if="{{userAppID<0}}">获取我的编号</button>
+            <button wx:else>更新我的信息</button>
+            <!-- <button bindtap='gotoList'>查看他人信息</button> -->
+          </view>
+        </view>
+      </view>
+    </form>
+    <view class="weui-cell__bd">
+      <view class="weui-input" wx:if="{{userAppID>0}}">编号#{{userAppID}}</view>
+    </view>
+    <template is="foot" />
+  </view>
+</view>

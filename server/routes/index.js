@@ -34,4 +34,11 @@ router.post('/message', controllers.message.post)
 
 router.get('/demo', controllers.demo)
 
+//person CRUD
+router.get('/getAllPerson', controllers.person.getAllPerson)
+// router.get('/getByIDPerson/:id', controllers.person.getByIDPerson)
+// router.get('/deletePerson', controllers.person.deletePerson)
+router.post('/addPerson', controllers.person.addPerson)
+// router.post('/updatePerson', controllers.person.updatePerson)
+
 module.exports = router
