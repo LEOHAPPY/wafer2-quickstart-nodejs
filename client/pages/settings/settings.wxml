@@ -37,7 +37,7 @@
 
           <view class="weui-cell weui-cell_input">
             <view class="weui-cell__hd">
-              <view class="weui-label">身高(米)</view>
+              <view class="weui-label">身高</view>
             </view>
             <view class="weui-cell__bd">
               <slider name="height" show-value min='120' max='190' value='150'></slider>
@@ -65,7 +65,7 @@
               <view class="weui-label">籍贯</view>
             </view>
             <view class="weui-cell__bd">
-              <picker name="hometown" mode="region" bindchange="bindRegionChange" value="{{region}}">
+              <picker name="hometown" mode="region" value="{{region}}" bindchange="bindRegionChange" >
                 <view class="weui-input">{{region[0]}}，{{region[1]}}，{{region[2]}}</view>
               </picker>
             </view>
@@ -129,16 +129,16 @@
             </view>
           </view>
         </view>
+      </view>
 
-
+      <view class="weui-btn-area">
+        <button class="weui-btn" formType="submit" type="primary" wx:if="{{userAppID<0}}">获取我的编号</button>
+        <button wx:else class="weui-btn">更新我的信息</button>
+        <!-- <button bindtap='gotoList'>查看他人信息</button> -->
       </view>
     </form>
 
-    <view class="weui-btn-area">
-      <button class="weui-btn" formType="submit" type="primary" wx:if="{{userAppID<0}}">获取我的编号</button>
-      <button wx:else class="weui-btn">更新我的信息</button>
-      <!-- <button bindtap='gotoList'>查看他人信息</button> -->
-    </view>
+
     <!-- <view class="weui-cell__bd">
       <view class="weui-input" wx:if="{{userAppID>0}}">编号#{{userAppID}}</view>
     </view>

@@ -61,7 +61,10 @@ Page({
 
   formSubmit: function (event) {
     console.log('event.detail.value',event.detail.value);
-    post(event.detail.value);
+    event.detail.value.hometown = JSON.stringify(event.detail.value.hometown);
+    var personObject = event.detail.value;
+    console.log('personObj',personObject)
+    post(personObject);
   },
 
   formReset: function () {
@@ -98,7 +101,9 @@ Page({
   },
 
   bindRegionChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
+    console.log('picker发送选择改变，携带值为', JSON.stringify(e.detail.value))
+    console.log('picker发送选择改变，携带值为', JSON.parse(JSON.stringify(e.detail.value)))
+
     this.setData({
       region: e.detail.value
     })
@@ -117,21 +122,24 @@ function post(objectPerson) {
       'content-type': 'application/json'
     },
     success(result) {
-      util.showSuccess('编号' + result.data.id)
-      wx.setStorage({
-        key: 'userAppID',
-        data: result.data.id,
-      })
-      that.setData({
-        requestResult: result.data,
-        userAppID: result.data.id
-      })
+      console.log('result.data',result.data)
+      if(!result.data){
+        util.showSuccess('编号' + result.data.id)
+        wx.setStorage({
+          key: 'userAppID',
+          data: result.data.id,
+        })
+        that.setData({
+          requestResult: result.data,
+          userAppID: result.data.id
+        })
 
-      //also save personDtl to storage
-      wx.setStorage({
-        key: 'personDtl',
-        data: objectPerson,
-      })
+        //also save personDtl to storage
+        wx.setStorage({
+          key: 'personDtl',
+          data: objectPerson,
+        })
+      }
     },
     fail(error) {
       util.showModel('请求失败', error);
