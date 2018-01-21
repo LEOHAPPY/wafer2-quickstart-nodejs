@@ -23,7 +23,9 @@ var config = {
         // 上传图片接口
         uploadUrl: `${host}/weapp/upload`,
 
-        addPerson: `${host}/weapp/addPerson`
+        addPerson: `${host}/weapp/addPerson`,
+
+        updatePerson: `${host}/weapp/updatePerson`
     }
 };
 

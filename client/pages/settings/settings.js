@@ -18,7 +18,8 @@ Page({
     userInfo: {},
     logged: false,
     takeSession: false,
-    userAppID: '-1'
+    userAppID: '-1',
+    personObj: {}
   },
 
   onLoad: function (options) {
@@ -46,25 +47,45 @@ Page({
           that.setData({
             userAppID: res.data
           });
-          // get local personDtl info
+
           wx.getStorage({
             key: 'personDtl',
             success: function (res) {
-              console.log(res.data)
+              console.log(res.data);
+              that.setData({
+                personObj: res.data
+              });
+              console.log('that.personObj', that.data.personObj)
             },
           });
-
         }
       },
-    })
+    });
+    // get local personDtl info
+    
   },
 
   formSubmit: function (event) {
-    console.log('event.detail.value',event.detail.value);
-    event.detail.value.hometown = JSON.stringify(event.detail.value.hometown);
-    var personObject = event.detail.value;
-    console.log('personObj',personObject)
-    post(personObject);
+    console.log('that.userAppID',that.data.userAppID)
+    if(that.data.userAppID < 0){
+      console.log('event.detail.value', event.detail.value);
+      //stringify and remove ["","",""] first and last for region and replace all  "
+      event.detail.value.hometown = JSON.stringify(event.detail.value.hometown).substr(1).slice(0, -1).replace(/\"/g, "");
+
+      var personObject = event.detail.value;
+      console.log('personObj', personObject)
+
+      addPersonInfo(personObject); 
+    }else{
+      //trim id
+      event.detail.value.id = event.detail.value.id.trim();
+      console.log('event.detail.value', event.detail.value);
+      var personObject = event.detail.value;
+      console.log('personObj update', personObject)
+
+      updatePersonInfo(personObject);
+    }
+    
   },
 
   formReset: function () {
@@ -111,35 +132,64 @@ Page({
 
 });
 
-function post(objectPerson) {
-  
-  util.showBusy('发送中...')
+function updatePersonInfo(objectPerson){
+  util.showBusy('')
   wx.request({
-    url: config.service.addPerson,
+    url: config.service.updatePerson,
     method: "POST",
-    data: {personDtl:objectPerson},
+    data: { personDtl: objectPerson },
     header: {
       'content-type': 'application/json'
     },
     success(result) {
-      console.log('result.data',result.data)
-      if(!result.data){
-        util.showSuccess('编号' + result.data.id)
-        wx.setStorage({
-          key: 'userAppID',
-          data: result.data.id,
-        })
-        that.setData({
-          requestResult: result.data,
-          userAppID: result.data.id
-        })
+      console.log('result.data', result.data)
 
-        //also save personDtl to storage
-        wx.setStorage({
-          key: 'personDtl',
-          data: objectPerson,
-        })
-      }
+      wx.pageScrollTo({
+        scrollTop: 0
+      })
+      util.showSuccess('')
+      
+      wx.setStorage({
+        key: 'personDtl',
+        data: objectPerson,
+      })
+      
+    },
+    fail(error) {
+      util.showModel('请求失败', error);
+      console.log('request fail', error);
+    }
+  })
+}
+
+function addPersonInfo(objectPerson) {
+
+  util.showBusy('')
+  wx.request({
+    url: config.service.addPerson,
+    method: "POST",
+    data: { personDtl: objectPerson },
+    header: {
+      'content-type': 'application/json'
+    },
+    success(result) {
+      console.log('result.data', result.data)
+      wx.pageScrollTo({
+        scrollTop: 0
+      })
+      util.showSuccess('编号' + result.data.id)
+      wx.setStorage({
+        key: 'userAppID',
+        data: result.data.id,
+      })
+      wx.setStorage({
+        key: 'personDtl',
+        data: objectPerson,
+      })
+      that.setData({
+        requestResult: result.data,
+        userAppID: result.data.id
+      })
     },
     fail(error) {
       util.showModel('请求失败', error);

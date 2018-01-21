@@ -1,8 +1,10 @@
 <view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
 
   <view class="page__bd">
-    <view class="weui-cells__title" style="text-align: center">我的信息</view>
-    <form bindsubmit="formSubmit" bindreset="formReset">
+    <view class="weui-cells__title" style="text-align: center">{{userAppID>0? ("我-#" + userAppID): '我的信息'}}</view>
+
+
+    <form bindsubmit="formSubmit" bindreset="formReset" wx:if="{{userAppID<0}}">
       <view class="weui-cells weui-cells_after-title">
         <view class="weui-cells ">
 
@@ -11,7 +13,7 @@
               <view class="weui-label">昵称</view>
             </view>
             <view class="weui-cell__bd">
-              <input class="weui-input" type="text" placeholder="" name="userName"></input>
+              <input class="weui-input" type="text" placeholder="" name="userName" value=''></input>
             </view>
           </view>
 
@@ -20,7 +22,7 @@
               <view class="weui-label">微信号</view>
             </view>
             <view class="weui-cell__bd">
-              <input class="weui-input" type="text" placeholder="仅显示给红娘" name="wechatID">{{weichatID}}</input>
+              <input class="weui-input" type="text" placeholder="仅显示给红娘" name="wechatID" value=''></input>
             </view>
           </view>
 
@@ -65,7 +67,7 @@
               <view class="weui-label">籍贯</view>
             </view>
             <view class="weui-cell__bd">
-              <picker name="hometown" mode="region" value="{{region}}" bindchange="bindRegionChange" >
+              <picker name="hometown" mode="region" value="{{region}}" bindchange="bindRegionChange">
                 <view class="weui-input">{{region[0]}}，{{region[1]}}，{{region[2]}}</view>
               </picker>
             </view>
@@ -133,11 +135,143 @@
 
       <view class="weui-btn-area">
         <button class="weui-btn" formType="submit" type="primary" wx:if="{{userAppID<0}}">获取我的编号</button>
-        <button wx:else class="weui-btn">更新我的信息</button>
+        <button wx:else class="weui-btn" formType="submit">更新我的信息</button>
         <!-- <button bindtap='gotoList'>查看他人信息</button> -->
       </view>
     </form>
 
+    <form bindsubmit="formSubmit" bindreset="formReset" wx:if="{{userAppID>0}}">
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cells ">
+
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label" style='color: #999'>编号</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" style='color: #999' type="text" placeholder="" name="id" value="{{userAppID}} " disabled="true"></input>
+            </view>
+          </view>
+
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">昵称</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" type="text" placeholder="" name="userName" value="{{personObj.userName}}"></input>
+            </view>
+          </view>
+
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">微信号</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" type="text" placeholder="仅显示给红娘" name="wechatID" value='{{personObj.wechatID}}'></input>
+            </view>
+          </view>
+
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">性别</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" type="text" placeholder="" name="gender" value="{{personObj.gender}}"></input>
+            </view>
+          </view>
+
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">身高</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" type="text" placeholder="" name="height" value="{{personObj.height}}"></input>
+            </view>
+          </view>
+
+          <!-- <view class="page-section-title">体重(公斤)</view>
+          <view class="body-view">
+            <slider name="weight" show-value min='30' max='200' value='50'></slider>
+          </view> -->
+
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">出生年月</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" type="text" placeholder="" name="birthday" value="{{personObj.birthday}}"></input>
+            </view>
+          </view>
+
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">籍贯</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" type="text" placeholder="" name="hometown" value="{{personObj.hometown}}"></input>
+            </view>
+          </view>
+
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">职业</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" type="text" placeholder="" name="career" value='{{personObj.career}}'></input>
+            </view>
+          </view>
+
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">工作地点</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" type="text" placeholder="" name="workplace" value='{{personObj.workplace}}'></input>
+            </view>
+          </view>
+
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">学历</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" type="text" placeholder="" name="degreeLevel" value="{{personObj.degreeLevel}}"></input>
+            </view>
+          </view>
+
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">家中排行</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" type="text" placeholder="" name="brothers" value="{{personObj.brothers}}"></input>
+            </view>
+          </view>
+        </view>
+
+        <view class="weui-cells__title">介绍一下自己</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">
+              <textarea style="height: 3em" name="selfIntro" placeholder="爱好/特长/生活态度" value='{{personObj.selfIntro}}' />
+            </view>
+          </view>
+        </view>
+
+        <view class="weui-cells__title">择偶要求</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell">
+            <view class="weui-cell__bd">
+              <textarea style="height: 3em" name="selfWish" placeholder="心中她/他的样子" value='{{personObj.selfWish}}' />
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="weui-btn-area">
+        <button class="weui-btn" formType="submit">更新我的信息</button>
+      </view>
+    </form>
 
     <!-- <view class="weui-cell__bd">
       <view class="weui-input" wx:if="{{userAppID>0}}">编号#{{userAppID}}</view>

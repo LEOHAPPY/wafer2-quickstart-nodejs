@@ -8,7 +8,7 @@ async function getAllPerson(ctx, next) {
     sqlCommand: mysql.select().table('person').toString()
   }
   ctx.body = data
-} 
+}
 
 // async function getByIDPerson(ctx, next) {
 //   // getByIDPerson/111
@@ -26,27 +26,31 @@ async function getAllPerson(ctx, next) {
 async function addPerson(ctx, next) {
   // var requestBody = ctx.request.body
   var personDtl = ctx.request.body.personDtl
-  var data = {
-    id : '',
+  var returnData = {
+    id: '',
     msg: ''
   }
   await mysql("person")
     .insert(personDtl)
     .then(function (id) {
-      data.id = id[0];
-      data.msg = 'insert'
+      returnData.id = id[0];
+      returnData.msg = 'insert'
     })
-  ctx.body = data
+  ctx.body = returnData
 }
 
 async function updatePerson(ctx, next) {
-  var { personID, personDtl } = ctx.query;
+  var personDtl = ctx.request.body.personDtl
+  var returnData = {
+    msg: ''
+  }
   await mysql("person")
-    .update("personDtl", { personDtl })
-    .where("id", { personID })
+    .update(personDtl)
+    .where("id", personDtl.id)
     .then(function (count) {
-      console.log(count);
-    });
+      returnData.msg = count + 'update'
+    })
+  ctx.body = returnData
 }
 
 // async function deletePerson(ctx, next) {
@@ -64,6 +68,6 @@ module.exports = {
   getAllPerson,
   // getByIDPerson,
   addPerson,
-  // updatePerson,
+  updatePerson,
   // deletePerson
 }

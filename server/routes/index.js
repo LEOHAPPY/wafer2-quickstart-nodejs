@@ -39,6 +39,6 @@ router.get('/getAllPerson', controllers.person.getAllPerson)
 // router.get('/getByIDPerson/:id', controllers.person.getByIDPerson)
 // router.get('/deletePerson', controllers.person.deletePerson)
 router.post('/addPerson', controllers.person.addPerson)
-// router.post('/updatePerson', controllers.person.updatePerson)
+router.post('/updatePerson', controllers.person.updatePerson)
 
 module.exports = router
