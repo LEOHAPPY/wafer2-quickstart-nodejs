@@ -8,22 +8,31 @@
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "Wafer Quick Start",
+    "navigationBarTitleText": "",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
+    "color": "#a9b7b7",
+    "selectedColor": "#11cd6e",
+    "borderStyle": "white",
     "list": [
       {
         "pagePath": "pages/settings/settings",
-        "text": "我"
+        "text": "我",
+        "iconPath": "image/account.png",
+        "selectedIconPath": "image/account-g.png"
       },
       {
         "pagePath": "pages/personList/personList",
-        "text": "他 | 她"
+        "text": "他 | 她",
+        "iconPath": "image/favorites.png",
+        "selectedIconPath": "image/favorites-g.png"
       },
       {
         "pagePath": "pages/demo/demo",
-        "text": "红娘"
+        "text": "红娘",
+        "iconPath": "image/service.png",
+        "selectedIconPath": "image/service-g.png"
       }
     ]
   }

@@ -134,12 +134,13 @@
       </view>
 
       <view class="weui-btn-area">
-        <button class="weui-btn" formType="submit" type="primary" wx:if="{{userAppID<0}}">获取我的编号</button>
-        <button wx:else class="weui-btn" formType="submit">更新我的信息</button>
+        <button class="weui-btn" formType="submit" type="primary">获取我的编号</button>
+        <!-- <button wx:else class="weui-btn" formType="submit">更新我的信息</button> -->
         <!-- <button bindtap='gotoList'>查看他人信息</button> -->
       </view>
     </form>
 
+<!--updage page  -->
     <form bindsubmit="formSubmit" bindreset="formReset" wx:if="{{userAppID>0}}">
       <view class="weui-cells weui-cells_after-title">
         <view class="weui-cells ">

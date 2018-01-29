@@ -39,35 +39,34 @@ Page({
   },
 
   checkAppID() {
+    //get personObj first, then userAppID
+
+    wx.getStorage({
+      key: 'personDtl',
+      success: function (res) {
+        console.log(res.data);
+        that.setData({
+          personObj: res.data
+        });
+      console.log('that.personObj', that.data.personObj)
+      },
+    });
+
     wx.getStorage({
       key: 'userAppID',
       success: function (res) {
         console.log(res.data);
-        if (res.data > 0 || typeof (res.data) != 'undefined') {
-          that.setData({
-            userAppID: res.data
-          });
-
-          wx.getStorage({
-            key: 'personDtl',
-            success: function (res) {
-              console.log(res.data);
-              that.setData({
-                personObj: res.data
-              });
-              console.log('that.personObj', that.data.personObj)
-            },
-          });
-        }
+        that.setData({
+          userAppID: res.data
+        });
+        console.log('that.userAppID', that.data.userAppID)
       },
     });
-    // get local personDtl info
-    
   },
 
   formSubmit: function (event) {
-    console.log('that.userAppID',that.data.userAppID)
-    if(that.data.userAppID < 0){
+    console.log('that.userAppID', that.data.userAppID)
+    if (that.data.userAppID < 0) {
       console.log('event.detail.value', event.detail.value);
       //stringify and remove ["","",""] first and last for region and replace all  "
       event.detail.value.hometown = JSON.stringify(event.detail.value.hometown).substr(1).slice(0, -1).replace(/\"/g, "");
@@ -75,8 +74,8 @@ Page({
       var personObject = event.detail.value;
       console.log('personObj', personObject)
 
-      addPersonInfo(personObject); 
-    }else{
+      addPersonInfo(personObject);
+    } else {
       //trim id
       event.detail.value.id = event.detail.value.id.trim();
       console.log('event.detail.value', event.detail.value);
@@ -85,7 +84,7 @@ Page({
 
       updatePersonInfo(personObject);
     }
-    
+
   },
 
   formReset: function () {
@@ -132,7 +131,7 @@ Page({
 
 });
 
-function updatePersonInfo(objectPerson){
+function updatePersonInfo(objectPerson) {
   util.showBusy('')
   wx.request({
     url: config.service.updatePerson,
@@ -148,12 +147,16 @@ function updatePersonInfo(objectPerson){
         scrollTop: 0
       })
       util.showSuccess('')
-      
+
       wx.setStorage({
         key: 'personDtl',
         data: objectPerson,
       })
-      
+
+      that.setData({
+        personObj: objectPerson
+      })
+
     },
     fail(error) {
       util.showModel('请求失败', error);
@@ -188,7 +191,8 @@ function addPersonInfo(objectPerson) {
       })
       that.setData({
         requestResult: result.data,
-        userAppID: result.data.id
+        userAppID: result.data.id,
+        personObj: objectPerson
       })
     },
     fail(error) {
