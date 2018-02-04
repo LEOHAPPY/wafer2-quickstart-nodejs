@@ -25,7 +25,11 @@ var config = {
 
         addPerson: `${host}/weapp/addPerson`,
 
-        updatePerson: `${host}/weapp/updatePerson`
+        updatePerson: `${host}/weapp/updatePerson`,
+
+        getAllPerson: `${host}/weapp/getAllPerson`,
+
+        getByIDPerson: `${host}/weapp/getByIDPerson/`
     }
 };
 

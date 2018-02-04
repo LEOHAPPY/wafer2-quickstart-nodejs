@@ -1,66 +1,63 @@
-// pages/personList/personList.js
+var qcloud = require('../../vendor/wafer2-client-sdk/index');
+var config = require('../../config');
+var util = require('../../utils/util.js');
+var that;
+
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-  
+    personList: [],
+    personDtl: []
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
-  
+    that = this;
+
+    //load all the person information and list down 
+    getAllPerson();
+    getByIDPerson(102)
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
   
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })
+
+function getAllPerson(){
+  util.showBusy('');
+  wx.request({
+    url: config.service.getAllPerson,
+    method: 'get',
+    success(result){
+      console.log('get personlist',result.data);
+      that.setData({
+        personList : result.data.personInfo
+      });
+      console.log('that.personList',that.data.personList);
+      util.showSuccess('');
+    },
+    fail(error){
+      util.showModel('请求失败',error);
+      console.error('request fail',error);
+    }
+  });
+}
+
+function getByIDPerson(id) {
+  
+  util.showBusy('');
+  wx.request({
+    url: config.service.getByIDPerson + id,
+    method: 'get',
+    success(result) {
+      console.log('get personDtl', result.data);
+      that.setData({
+        personDtl: result.data.personInfo
+      });
+      console.log('that.personDtl', that.data.personDtl);
+      util.showSuccess('');
+    },
+    fail(error) {
+      util.showModel('请求失败', error);
+      console.error('request fail', error);
+    }
+  });
+}
