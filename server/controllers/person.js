@@ -10,16 +10,16 @@ async function getAllPerson(ctx, next) {
   ctx.body = data
 }
 
-// async function getByIDPerson(ctx, next) {
-//   // getByIDPerson/111
-//   var personID = ctx.params.id
-//   var data = {
-//     id: personID,
-//     personInfo: await mysql('person').select('*').where(mysql.raw('?? = ?', ['person.id', personID])),
-//     msg: mysql('person').select('*').where(mysql.raw('?? = ?', ['person.id', personID])).toString()
-//   }
-//   ctx.body = data
-// }
+async function getByIDPerson(ctx, next) {
+  // getByIDPerson/111
+  var personID = ctx.params.id
+  var data = {
+    id: personID,
+    personInfo: await mysql('person').select('*').where(mysql.raw('?? = ?', ['person.id', personID])),
+    msg: mysql('person').select('*').where(mysql.raw('?? = ?', ['person.id', personID])).toString()
+  }
+  ctx.body = data
+}
 
 //
 //post and return person id
@@ -66,7 +66,7 @@ async function updatePerson(ctx, next) {
 
 module.exports = {
   getAllPerson,
-  // getByIDPerson,
+  getByIDPerson,
   addPerson,
   updatePerson,
   // deletePerson

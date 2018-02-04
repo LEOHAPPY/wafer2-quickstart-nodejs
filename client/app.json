@@ -2,7 +2,8 @@
   "pages": [
     "pages/settings/settings",
     "pages/personList/personList",
-    "pages/demo/demo"
+    "pages/personDtl/personDtl",
+    "pages/hongNiang/hongNiang"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -29,7 +30,7 @@
         "selectedIconPath": "image/favorites-g.png"
       },
       {
-        "pagePath": "pages/demo/demo",
+        "pagePath": "pages/hongNiang/hongNiang",
         "text": "红娘",
         "iconPath": "image/service.png",
         "selectedIconPath": "image/service-g.png"

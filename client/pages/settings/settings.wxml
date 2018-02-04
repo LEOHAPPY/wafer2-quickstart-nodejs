@@ -3,7 +3,6 @@
   <view class="page__bd">
     <view class="weui-cells__title" style="text-align: center">{{userAppID>0? ("我-#" + userAppID): '我的信息'}}</view>
 
-
     <form bindsubmit="formSubmit" bindreset="formReset" wx:if="{{userAppID<0}}">
       <view class="weui-cells weui-cells_after-title">
         <view class="weui-cells ">
@@ -274,9 +273,5 @@
       </view>
     </form>
 
-    <!-- <view class="weui-cell__bd">
-      <view class="weui-input" wx:if="{{userAppID>0}}">编号#{{userAppID}}</view>
-    </view>
-     -->
   </view>
 </view>

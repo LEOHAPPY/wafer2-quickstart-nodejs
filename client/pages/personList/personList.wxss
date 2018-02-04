@@ -1,1 +1,3 @@
 /* pages/personList/personList.wxss */
+
+@import "../../style/weui.wxss";
