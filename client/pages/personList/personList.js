@@ -11,18 +11,30 @@ Page({
 
   onLoad: function (options) {
     that = this;
-
     //load all the person information and list down 
+    // getAllPerson();
+    // getByIDPerson(102)
+  },
+
+  onShow: function () {
     getAllPerson();
     getByIDPerson(102)
   },
 
+  openPerson: function(e){
+    console.log('open person clikced',e)
+    let dataPersonDtl = that.data.personList[e.currentTarget.id];
+    console.log('dataPersonDtl', dataPersonDtl)
+    wx.navigateTo({
+      url: '../personDtl/personDtl?dataPersonDtl=' +  JSON.stringify(dataPersonDtl)
+    })
+  }
 
-  
+
 })
 
 function getAllPerson(){
-  util.showBusy('');
+  // util.showBusy('');
   wx.request({
     url: config.service.getAllPerson,
     method: 'get',
@@ -32,10 +44,10 @@ function getAllPerson(){
         personList : result.data.personInfo
       });
       console.log('that.personList',that.data.personList);
-      util.showSuccess('');
+      // util.showSuccess('');
     },
     fail(error){
-      util.showModel('请求失败',error);
+      // util.showModel('请求失败',error);
       console.error('request fail',error);
     }
   });
@@ -43,7 +55,7 @@ function getAllPerson(){
 
 function getByIDPerson(id) {
   
-  util.showBusy('');
+  // util.showBusy('');
   wx.request({
     url: config.service.getByIDPerson + id,
     method: 'get',
@@ -53,10 +65,10 @@ function getByIDPerson(id) {
         personDtl: result.data.personInfo
       });
       console.log('that.personDtl', that.data.personDtl);
-      util.showSuccess('');
+      // util.showSuccess('');
     },
     fail(error) {
-      util.showModel('请求失败', error);
+      // util.showModel('请求失败', error);
       console.error('request fail', error);
     }
   });
