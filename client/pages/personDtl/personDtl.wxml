@@ -1,0 +1,137 @@
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__bd">
+    <view class="weui-cells__title" style="text-align: center">{{personObj.gender=='男'? '他的信息': '她的信息'}}</view>
+
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cells " disabled="true">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">编号</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" type="text" placeholder="" name="id" value="{{personObj.id}} " disabled="true"></input>
+          </view>
+        </view>
+
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">昵称</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" type="text" placeholder="" name="userName" value="{{personObj.userName}}" disabled="true"></input>
+          </view>
+        </view>
+
+        <!-- <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">微信号</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" type="text" placeholder="仅显示给红娘" name="wechatID" value='{{personObj.wechatID}}' disabled="true"></input>
+          </view>
+        </view> -->
+
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">性别</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" type="text" placeholder="" name="gender" value="{{personObj.gender}}" disabled="true"></input>
+          </view>
+        </view>
+
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">身高</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" type="text" placeholder="" name="height" value="{{personObj.height}}" disabled="true"></input>
+          </view>
+        </view>
+
+        <!-- <view class="page-section-title">体重(公斤)</view>
+          <view class="body-view">
+            <slider name="weight" show-value min='30' max='200' value='50'></slider>
+          </view> -->
+
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">出生年月</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" type="text" placeholder="" name="birthday" value="{{personObj.birthday}}" disabled="true"></input>
+          </view>
+        </view>
+
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">籍贯</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" type="text" placeholder="" name="hometown" value="{{personObj.hometown}}" disabled="true"></input>
+          </view>
+        </view>
+
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">职业</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" type="text" placeholder="" name="career" value='{{personObj.career}}' disabled="true"></input>
+          </view>
+        </view>
+
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">工作地点</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" type="text" placeholder="" name="workplace" value='{{personObj.workplace}}' disabled="true"></input>
+          </view>
+        </view>
+
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">学历</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" type="text" placeholder="" name="degreeLevel" value="{{personObj.degreeLevel}}" disabled="true"></input>
+          </view>
+        </view>
+
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">家中排行</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" type="text" placeholder="" name="brothers" value="{{personObj.brothers}}" disabled="true"></input>
+          </view>
+        </view>
+      </view>
+
+      <view class="weui-cells__title">介绍一下自己</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <textarea style="height: 3em" name="selfIntro" placeholder="爱好/特长/生活态度" value='{{personObj.selfIntro}}' disabled="true" />
+          </view>
+        </view>
+      </view>
+
+      <view class="weui-cells__title">择偶要求</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <textarea style="height: 3em" name="selfWish" placeholder="心中她/他的样子" value='{{personObj.selfWish}}' disabled="true" />
+          </view>
+        </view>
+      </view>
+
+
+    </view>
+    <view class="weui-btn-area">
+      <button class="weui-btn" bindtap='toHongNiangPage' type="primary">联系红娘</button>
+    </view>
+
+  </view>
+</view>

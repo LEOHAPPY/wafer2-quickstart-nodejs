@@ -1,0 +1,3 @@
+/* pages/personDtl/personDtl.wxss */
+
+@import "../../style/weui.wxss";

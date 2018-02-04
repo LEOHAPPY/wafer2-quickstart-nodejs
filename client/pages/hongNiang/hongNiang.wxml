@@ -1,0 +1,15 @@
+<!--pages/hongNiang/hongNiang.wxml-->
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__bd">
+    <view class="weui-cells__title" style="text-align: center">{{personObj.gender=='男'? '他的信息': '她的信息'}}</view>
+
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cells ">
+
+        <text>pages/hongNiang/hongNiang.wxml</text>
+      </view>
+    </view>
+
+
+  </view>
+</view>
