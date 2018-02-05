@@ -1,5 +1,18 @@
 <view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__hd">
+   <view class="userinfo" bindtap="login">
+        <image
+            class="userinfo-avatar"
+            src="{{logged ? userInfo.avatarUrl : './user-unlogin.png'}}"
+            background-size="cover"
+        ></image>
+        <view>
+            <text class="userinfo-nickname">{{logged ? userInfo.nickName : '点击测试登录接口'}}</text>
+            <text class="userinfo-nickname" wx:if="{{logged}}">{{userInfo.lastLoginTime}}</text>
+        </view>
+    </view>
 
+  </view>
   <view class="page__bd">
     <view class="weui-cells__title" style="text-align: center">{{userAppID>0? ("我-#" + userAppID): '我的信息'}}</view>
 
@@ -27,6 +40,15 @@
 
           <view class="weui-cell weui-cell_input">
             <view class="weui-cell__hd">
+              <view class="weui-label">手机号</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" type="number" placeholder="仅显示给红娘" name="phoneNum" value=''></input>
+            </view>
+          </view>
+
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
               <view class="weui-label">性别</view>
             </view>
             <view class="weui-cell__bd">
@@ -38,10 +60,11 @@
 
           <view class="weui-cell weui-cell_input">
             <view class="weui-cell__hd">
-              <view class="weui-label">身高</view>
+              <view class="weui-label">身高（厘米）</view>
             </view>
+        
             <view class="weui-cell__bd">
-              <slider name="height" show-value min='120' max='190' value='150'></slider>
+              <input class="weui-input" type="number" placeholder="" name="height" value=''></input>
             </view>
           </view>
 
@@ -133,7 +156,7 @@
       </view>
 
       <view class="weui-btn-area">
-        <button class="weui-btn" formType="submit" type="primary">获取我的编号</button>
+        <button class="weui-btn" formType="submit" type="primary">提交获取我的编号</button>
         <!-- <button wx:else class="weui-btn" formType="submit">更新我的信息</button> -->
         <!-- <button bindtap='gotoList'>查看他人信息</button> -->
       </view>
@@ -168,6 +191,15 @@
             </view>
             <view class="weui-cell__bd">
               <input class="weui-input" type="text" placeholder="仅显示给红娘" name="wechatID" value='{{personObj.wechatID}}'></input>
+            </view>
+          </view>
+
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label">手机号</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" type="number" placeholder="仅显示给红娘" name="phoneNum" value='{{personObj.phoneNum}}'></input>
             </view>
           </view>
 
@@ -269,7 +301,7 @@
       </view>
 
       <view class="weui-btn-area">
-        <button class="weui-btn" formType="submit">更新我的信息</button>
+        <button class="weui-btn" formType="submit">提交更新我的信息</button>
       </view>
     </form>
 

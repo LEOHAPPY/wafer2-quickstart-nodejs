@@ -10,10 +10,7 @@ Page({
     region: ['湖南省', '邵阳县', '邵东县'],
     degreeLevel: ['小学', '初中', '高中', '本科', '硕士', '博士'],
     brothers: ['无（独生）', '老大', '老二', '老三', '老四', '老五', '老六'],
-    requestResult: {
-      id: '',
-      msg: ''
-    },
+    requestResult: '',
 
     userInfo: {},
     logged: false,
@@ -26,6 +23,8 @@ Page({
     that = this;
     // that.login();
     that.checkAppID();
+    that.login();
+    //if 
   },
 
   gotoList() {
@@ -48,7 +47,7 @@ Page({
         that.setData({
           personObj: res.data
         });
-      console.log('that.personObj', that.data.personObj)
+        console.log('that.personObj', that.data.personObj)
       },
     });
 
@@ -72,7 +71,9 @@ Page({
       event.detail.value.hometown = JSON.stringify(event.detail.value.hometown).substr(1).slice(0, -1).replace(/\"/g, "");
 
       var personObject = event.detail.value;
-      console.log('personObj', personObject)
+      personObject.userInfo = JSON.stringify(that.data.userInfo);
+      personObject.openID = that.data.userInfo.openId;
+      console.log('personObj', personObject);
 
       addPersonInfo(personObject);
     } else {
@@ -80,7 +81,9 @@ Page({
       event.detail.value.id = event.detail.value.id.trim();
       console.log('event.detail.value', event.detail.value);
       var personObject = event.detail.value;
-      console.log('personObj update', personObject)
+      personObject.userInfo = JSON.stringify(that.data.userInfo);
+      personObject.openID = that.data.userInfo.openId;
+      console.log('personObj update', personObject);
 
       updatePersonInfo(personObject);
     }
@@ -127,6 +130,85 @@ Page({
     this.setData({
       region: e.detail.value
     })
+  },
+
+  login: function () {
+    if (this.data.logged) return
+
+    util.showBusy('正在登录')
+
+    // 调用登录接口
+    qcloud.login({
+      success(result) {
+        if (result) {
+          util.showSuccess('登录成功')
+          that.setData({
+            userInfo: result,
+            logged: true
+          })
+        } else {
+          // 如果不是首次登录，不会返回用户信息，请求用户信息接口获取
+          qcloud.request({
+            url: config.service.requestUrl,
+            login: true,
+            success(result) {
+              util.showSuccess('登录成功')
+              that.setData({
+                userInfo: result.data.data,
+                logged: true
+              })
+              console.log('that.data.userInfo',that.data.userInfo)
+              getByOpenIDPerson(that.data.userInfo.openId);
+            },
+
+            fail(error) {
+              util.showModel('请求失败', error)
+              console.log('request fail', error)
+            }
+          })
+        }
+
+        
+      },
+
+      fail(error) {
+        util.showModel('登录失败', error)
+        console.log('登录失败', error)
+      }
+    })
+  },
+
+  // 切换是否带有登录态
+  switchRequestMode: function (e) {
+    this.setData({
+      takeSession: e.detail.value
+    })
+    this.doRequest()
+  },
+
+  doRequest: function () {
+    util.showBusy('请求中...')
+    var that = this
+    var options = {
+      url: config.service.requestUrl,
+      login: true,
+      success(result) {
+        util.showSuccess('请求成功完成')
+        console.log('request success', result)
+        that.setData({
+          requestResult: JSON.stringify(result.data)
+        })
+      },
+      fail(error) {
+        util.showModel('请求失败', error);
+        console.log('request fail', error);
+      }
+    }
+    if (this.data.takeSession) {  // 使用 qcloud.request 带登录态登录
+      qcloud.request(options)
+    } else {    // 使用 wx.request 则不带登录态
+      wx.request(options)
+    }
   },
 
 });
@@ -200,4 +282,27 @@ function addPersonInfo(objectPerson) {
       console.log('request fail', error);
     }
   })
+}
+
+function getByOpenIDPerson(id) {
+  
+  // util.showBusy('');
+  wx.request({
+    url: config.service.getByOpenIDPerson + id,
+    method: 'get',
+    success(result) {
+      console.log('get personDtl', result.data);
+      that.setData({
+        personDtl: result.data.personInfo,
+        userAppID: result.data.personInfo[0].id,
+        personObj: result.data.personInfo[0]
+      });
+      console.log('that.personDtl', that.data.personDtl);
+      // util.showSuccess('');
+    },
+    fail(error) {
+      // util.showModel('请求失败', error);
+      console.error('request fail', error);
+    }
+  });
 }
