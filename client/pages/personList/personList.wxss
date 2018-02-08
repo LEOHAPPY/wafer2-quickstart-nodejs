@@ -1,3 +1,7 @@
 /* pages/personList/personList.wxss */
 
 @import "../../style/weui.wxss";
+
+.weui-cells__title{
+  margin-bottom: 1.17647059em;
+}

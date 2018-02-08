@@ -1,20 +1,6 @@
 <view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
-  <view class="page__hd">
-   <view class="userinfo" bindtap="login">
-        <image
-            class="userinfo-avatar"
-            src="{{logged ? userInfo.avatarUrl : './user-unlogin.png'}}"
-            background-size="cover"
-        ></image>
-        <view>
-            <text class="userinfo-nickname">{{logged ? userInfo.nickName : '点击测试登录接口'}}</text>
-            <text class="userinfo-nickname" wx:if="{{logged}}">{{userInfo.lastLoginTime}}</text>
-        </view>
-    </view>
-
-  </view>
   <view class="page__bd">
-    <view class="weui-cells__title" style="text-align: center">{{userAppID>0? ("我-#" + userAppID): '我的信息'}}</view>
+    <view class="weui-cells__title" style="text-align: center">{{userAppID>0 ? ("我-#" + userAppID): '我的信息'}}</view>
 
     <form bindsubmit="formSubmit" bindreset="formReset" wx:if="{{userAppID<0}}">
       <view class="weui-cells weui-cells_after-title">
@@ -25,7 +11,7 @@
               <view class="weui-label">昵称</view>
             </view>
             <view class="weui-cell__bd">
-              <input class="weui-input" type="text" placeholder="" name="userName" value=''></input>
+              <input class="weui-input" type="text" placeholder="" name="userName" value='{{userInfo.nickName}}'></input>
             </view>
           </view>
 
@@ -84,11 +70,11 @@
             </view>
           </view>
 
-          <view class="weui-cell weui-cell_input">
-            <view class="weui-cell__hd">
+          <view class="weui-cell">
+            <view class="header">
               <view class="weui-label">籍贯</view>
             </view>
-            <view class="weui-cell__bd">
+            <view class="">
               <picker name="hometown" mode="region" value="{{region}}" bindchange="bindRegionChange">
                 <view class="weui-input">{{region[0]}}，{{region[1]}}，{{region[2]}}</view>
               </picker>
@@ -136,29 +122,27 @@
           </view>
         </view>
 
-        <view class="weui-cells__title">介绍一下自己</view>
+        <view class="weui-cells__title">自我介绍一下</view>
         <view class="weui-cells weui-cells_after-title">
           <view class="weui-cell">
             <view class="weui-cell__bd">
-              <textarea style="height: 3em" name="selfIntro" placeholder="爱好/特长/生活态度" />
+              <textarea style="height: 4em" name="selfIntro" placeholder="兴趣爱好 | 性格特征 ..." />
             </view>
           </view>
         </view>
 
-        <view class="weui-cells__title">择偶要求</view>
+        <view class="weui-cells__title">心动条件</view>
         <view class="weui-cells weui-cells_after-title">
           <view class="weui-cell">
             <view class="weui-cell__bd">
-              <textarea style="height: 3em" name="selfWish" placeholder="心中她/他的样子" />
+              <textarea style="height: 4em" name="selfWish" placeholder="身高 | 年龄 | 性格 ..." />
             </view>
           </view>
         </view>
       </view>
 
       <view class="weui-btn-area">
-        <button class="weui-btn" formType="submit" type="primary">提交获取我的编号</button>
-        <!-- <button wx:else class="weui-btn" formType="submit">更新我的信息</button> -->
-        <!-- <button bindtap='gotoList'>查看他人信息</button> -->
+        <button class="weui-btn" formType="submit" type="primary">提交</button>
       </view>
     </form>
 
@@ -214,10 +198,10 @@
 
           <view class="weui-cell weui-cell_input">
             <view class="weui-cell__hd">
-              <view class="weui-label">身高</view>
+              <view class="weui-label">身高（厘米）</view>
             </view>
             <view class="weui-cell__bd">
-              <input class="weui-input" type="text" placeholder="" name="height" value="{{personObj.height}}"></input>
+              <input class="weui-input" type="number" placeholder="" name="height" value="{{personObj.height}}"></input>
             </view>
           </view>
 
@@ -281,27 +265,27 @@
           </view>
         </view>
 
-        <view class="weui-cells__title">介绍一下自己</view>
+        <view class="weui-cells__title">自我介绍一下～</view>
         <view class="weui-cells weui-cells_after-title">
           <view class="weui-cell">
             <view class="weui-cell__bd">
-              <textarea style="height: 3em" name="selfIntro" placeholder="爱好/特长/生活态度" value='{{personObj.selfIntro}}' />
+              <textarea style="height: 4em" name="selfIntro" placeholder="兴趣爱好 | 性格特征 ..." value='{{personObj.selfIntro}}' />
             </view>
           </view>
         </view>
 
-        <view class="weui-cells__title">择偶要求</view>
+        <view class="weui-cells__title">心动条件</view>
         <view class="weui-cells weui-cells_after-title">
           <view class="weui-cell">
             <view class="weui-cell__bd">
-              <textarea style="height: 3em" name="selfWish" placeholder="心中她/他的样子" value='{{personObj.selfWish}}' />
+              <textarea style="height: 4em" name="selfWish" placeholder="身高 | 年龄 | 性格 ..." value='{{personObj.selfWish}}' />
             </view>
           </view>
         </view>
       </view>
 
       <view class="weui-btn-area">
-        <button class="weui-btn" formType="submit">提交更新我的信息</button>
+        <button class="weui-btn" formType="submit">更新</button>
       </view>
     </form>
 

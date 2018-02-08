@@ -22,7 +22,7 @@ Page({
   onLoad: function (options) {
     that = this;
     // that.login();
-    that.checkAppID();
+    // that.checkAppID();
     that.login();
     //if 
   },
@@ -40,16 +40,16 @@ Page({
   checkAppID() {
     //get personObj first, then userAppID
 
-    wx.getStorage({
-      key: 'personDtl',
-      success: function (res) {
-        console.log(res.data);
-        that.setData({
-          personObj: res.data
-        });
-        console.log('that.personObj', that.data.personObj)
-      },
-    });
+    // wx.getStorage({
+    //   key: 'personDtl',
+    //   success: function (res) {
+    //     console.log(res.data);
+    //     that.setData({
+    //       personObj: res.data
+    //     });
+    //     console.log('that.personObj', that.data.personObj)
+    //   },
+    // });
 
     wx.getStorage({
       key: 'userAppID',
@@ -135,34 +135,36 @@ Page({
   login: function () {
     if (this.data.logged) return
 
-    util.showBusy('正在登录')
+    util.showBusy('')
 
     // 调用登录接口
     qcloud.login({
       success(result) {
         if (result) {
-          util.showSuccess('登录成功')
+          util.showSuccess('')
           that.setData({
             userInfo: result,
-            logged: true
+            logged: true,
           })
+          getByOpenIDPerson(that.data.userInfo.openId);
+          console.log('frist time login this userInfo',that.data.userInfo)
         } else {
           // 如果不是首次登录，不会返回用户信息，请求用户信息接口获取
           qcloud.request({
             url: config.service.requestUrl,
             login: true,
             success(result) {
-              util.showSuccess('登录成功')
+              util.showSuccess('')
               that.setData({
                 userInfo: result.data.data,
-                logged: true
+                logged: true,
               })
-              console.log('that.data.userInfo',that.data.userInfo)
+              console.log('second time login that.data.userInfo',that.data.userInfo)
               getByOpenIDPerson(that.data.userInfo.openId);
             },
 
             fail(error) {
-              util.showModel('请求失败', error)
+              util.showModel('')
               console.log('request fail', error)
             }
           })
@@ -172,7 +174,7 @@ Page({
       },
 
       fail(error) {
-        util.showModel('登录失败', error)
+        // util.showModel('登录失败', error)
         console.log('登录失败', error)
       }
     })
@@ -230,10 +232,10 @@ function updatePersonInfo(objectPerson) {
       })
       util.showSuccess('')
 
-      wx.setStorage({
-        key: 'personDtl',
-        data: objectPerson,
-      })
+      // wx.setStorage({
+      //   key: 'personDtl',
+      //   data: objectPerson,
+      // })
 
       that.setData({
         personObj: objectPerson
@@ -267,10 +269,10 @@ function addPersonInfo(objectPerson) {
         key: 'userAppID',
         data: result.data.id,
       })
-      wx.setStorage({
-        key: 'personDtl',
-        data: objectPerson,
-      })
+      // wx.setStorage({
+      //   key: 'personDtl',
+      //   data: objectPerson,
+      // })
       that.setData({
         requestResult: result.data,
         userAppID: result.data.id,
@@ -285,24 +287,34 @@ function addPersonInfo(objectPerson) {
 }
 
 function getByOpenIDPerson(id) {
+  if(!id){
+    that.setData({
+      userAppID: -1
+    });
+  }else{
+    // util.showBusy('');
+    wx.request({
+      url: config.service.getByOpenIDPerson + id,
+      method: 'get',
+      success(result) {
+        console.log('get personDtl', result.data);
+        that.setData({
+          personDtl: result.data.personInfo,
+          userAppID: result.data.personInfo[0].id,
+          personObj: result.data.personInfo[0]
+        });
+        console.log('that.personDtl', that.data.personDtl);
+        // util.showSuccess('');
+      },
+      fail(error) {
+        // util.showModel('请求失败', error);
+        console.error('request fail', error);
+        that.setData({
+          userAppID: -1
+        });
+      }
+    });
+  }
   
-  // util.showBusy('');
-  wx.request({
-    url: config.service.getByOpenIDPerson + id,
-    method: 'get',
-    success(result) {
-      console.log('get personDtl', result.data);
-      that.setData({
-        personDtl: result.data.personInfo,
-        userAppID: result.data.personInfo[0].id,
-        personObj: result.data.personInfo[0]
-      });
-      console.log('that.personDtl', that.data.personDtl);
-      // util.showSuccess('');
-    },
-    fail(error) {
-      // util.showModel('请求失败', error);
-      console.error('request fail', error);
-    }
-  });
+  
 }
