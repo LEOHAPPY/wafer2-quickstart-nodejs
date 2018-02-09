@@ -45,31 +45,22 @@
             </view>
           </view>
 
-          <!-- <view class="page-section-title">体重(公斤)</view>
-          <view class="body-view">
-            <slider name="weight" show-value min='30' max='200' value='50'></slider>
-          </view> -->
-
-          <view class="weui-cell weui-cell_input">
+          <view class="weui-cell weui-cell_input bottom-border">
             <view class="weui-cell__hd">
               <view class="weui-label">出生年月</view>
             </view>
-            <view class="weui-cell__bd">
+            <view class="weui-cell__bd border-bottom">
               <picker name="birthday" mode="date" value="{{date}}" start="1970-09-01" end="2000-01-01" bindchange="bindDateChange">
                 <view class="weui-input">{{date}}</view>
               </picker>
             </view>
           </view>
 
+          <view class="weui-cells__title">籍贯</view>
           <view class="weui-cell weui-cell_input">
-            <view class="weui-cell__hd">
-              <view class="weui-label">籍贯</view>
-            </view>
-            <view class="weui-cell__bd">
-              <picker name="hometown" mode="region" value="{{region}}" bindchange="bindRegionChange">
-                <view class="weui-input">{{region[0]}}，{{region[1]}}，{{region[2]}}</view>
-              </picker>
-            </view>
+            <picker name="hometown" mode="region" value="{{region}}" bindchange="bindRegionChange">
+              <view class="weui-input">{{region[0]}}，{{region[1]}}，{{region[2]}}</view>
+            </picker>
           </view>
 
           <view class="weui-cell weui-cell_input">
@@ -101,7 +92,7 @@
             </view>
           </view>
 
-          <view class="weui-cell weui-cell_input">
+          <view class="weui-cell weui-cell_input bottom-border">
             <view class="weui-cell__hd">
               <view class="weui-label">家中排行</view>
             </view>
@@ -111,22 +102,22 @@
               </picker>
             </view>
           </view>
-        </view>
 
-        <view class="weui-cells__title">介绍一下自己</view>
-        <view class="weui-cells weui-cells_after-title">
-          <view class="weui-cell">
-            <view class="weui-cell__bd">
-              <textarea style="height: 3em" name="selfIntro" placeholder="爱好/特长/生活态度" />
+          <view class="weui-cells__title">介绍一下自己</view>
+          <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">
+                <textarea style="height: 3em" name="selfIntro" placeholder="爱好/特长/生活态度" />
+              </view>
             </view>
           </view>
-        </view>
 
-        <view class="weui-cells__title">择偶要求</view>
-        <view class="weui-cells weui-cells_after-title">
-          <view class="weui-cell">
-            <view class="weui-cell__bd">
-              <textarea style="height: 3em" name="selfWish" placeholder="心中她/他的样子" />
+          <view class="weui-cells__title">择偶要求</view>
+          <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+              <view class="weui-cell__bd">
+                <textarea style="height: 3em" name="selfWish" placeholder="心中她/他的样子" />
+              </view>
             </view>
           </view>
         </view>
@@ -139,7 +130,7 @@
       </view>
     </form>
 
-<!--updage page  -->
+    <!--updage page  -->
     <form bindsubmit="formSubmit" bindreset="formReset" wx:if="{{userAppID>0}}">
       <view class="weui-cells weui-cells_after-title">
         <view class="weui-cells ">
@@ -203,13 +194,9 @@
             </view>
           </view>
 
+          <view class="weui-cells__title">籍贯</view>
           <view class="weui-cell weui-cell_input">
-            <view class="weui-cell__hd">
-              <view class="weui-label">籍贯</view>
-            </view>
-            <view class="weui-cell__bd">
-              <input class="weui-input" type="text" placeholder="" name="hometown" value="{{personObj.hometown}}"></input>
-            </view>
+            <input class="weui-input" type="text" placeholder="" name="hometown" value="{{personObj.hometown}}"></input>
           </view>
 
           <view class="weui-cell weui-cell_input">
@@ -239,7 +226,7 @@
             </view>
           </view>
 
-          <view class="weui-cell weui-cell_input">
+          <view class="weui-cell weui-cell_input bottom-border">
             <view class="weui-cell__hd">
               <view class="weui-label">家中排行</view>
             </view>

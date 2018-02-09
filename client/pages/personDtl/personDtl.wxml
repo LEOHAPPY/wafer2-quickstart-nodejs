@@ -49,11 +49,6 @@
           </view>
         </view>
 
-        <!-- <view class="page-section-title">体重(公斤)</view>
-          <view class="body-view">
-            <slider name="weight" show-value min='30' max='200' value='50'></slider>
-          </view> -->
-
         <view class="weui-cell weui-cell_input">
           <view class="weui-cell__hd">
             <view class="weui-label">出生年月</view>
@@ -63,13 +58,9 @@
           </view>
         </view>
 
+        <view class="weui-cells__title">籍贯</view>
         <view class="weui-cell weui-cell_input">
-          <view class="weui-cell__hd">
-            <view class="weui-label">籍贯</view>
-          </view>
-          <view class="weui-cell__bd">
             <input class="weui-input" type="text" placeholder="" name="hometown" value="{{personObj.hometown}}" disabled="true"></input>
-          </view>
         </view>
 
         <view class="weui-cell weui-cell_input">
@@ -99,7 +90,7 @@
           </view>
         </view>
 
-        <view class="weui-cell weui-cell_input">
+        <view class="weui-cell weui-cell_input bottom-border">
           <view class="weui-cell__hd">
             <view class="weui-label">家中排行</view>
           </view>
