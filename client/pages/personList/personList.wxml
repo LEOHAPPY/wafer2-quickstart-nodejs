@@ -2,14 +2,30 @@
   <view class="page_bd">
     <view class="weui-cells__title" style="text-align: center">信息列表</view>
 
-    <view class="weui-cells weui-cells_after-title" wx:for="{{personList}}">
-      <view class="weui-cells ">
-        <view class="weui-cell" bindtap='openPerson' id='{{index}}'>
-          <view class="weui-cell__bd">{{item.id}}</view>
-          <view class="weui-cell__ft">{{item.selfWish}}</view>
+    <view class="weui-cell" wx:for="{{personList}}">
+      <view bindtap='openPerson' id='{{index}}'>
+        <view class="info">
+          <span class="">#{{item.id}}</span>
+          <span class="">{{item.userName}}</span>
+          <span class="">双子</span>          
+          <span class="wrapper">{{dateNow}}</span>
+          <span class="wrapper">{{item.height}}</span>
         </view>
+
+        <view class="info padding-top">
+            <span class="">{{item.degreeLevel}}</span>
+            <span class="">{{item.career}}</span>
+            <span class="">{{item.workplace}}</span>
+        </view>
+          
+
+        <view class="comments">
+          <view>{{item.selfWish}}</view>
+        </view>
+        
       </view>
+
     </view>
-    
   </view>
-</view>
+  </view>
+  

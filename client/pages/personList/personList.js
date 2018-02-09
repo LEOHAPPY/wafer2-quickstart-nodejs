@@ -6,7 +6,9 @@ var that;
 Page({
   data: {
     personList: [],
-    personDtl: []
+    personDtl: [],
+    dateNow: 0,
+    hometown: ''
   },
 
   onLoad: function (options) {
@@ -14,11 +16,19 @@ Page({
     //load all the person information and list down 
     // getAllPerson();
     // getByIDPerson(102)
+    
   },
 
   onShow: function () {
     getAllPerson();
-    getByIDPerson(102)
+    // getByIDPerson(102)
+
+    var d = new Date();
+    var n = d.getFullYear() - 1 - 1993;
+    console.log(n)
+    that.setData({
+      dateNow: n,
+    })
   },
 
   openPerson: function(e){
