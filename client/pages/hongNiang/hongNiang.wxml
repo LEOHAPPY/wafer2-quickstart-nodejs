@@ -1,23 +1,55 @@
 <!--pages/hongNiang/hongNiang.wxml-->
 <view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
   <view class="page__bd">
-    <view class="weui-cells__title" style="text-align: center">红娘信息</view>
+    <!-- <view class="weui-cells__title" style="text-align: center">红娘信息</view> -->
 
-      <image class="qrCode-image" src="{{'../../image/QRCode.png'}}"></image>
+    <!-- <image class="qrCode-image" src="{{'../../image/QRCode.png'}}"></image> -->
+    <view>
+      <p class="text-center" style="margin-bottom: 10px">
+        <span>欢迎来到甘塘角婚介</span>
+      </p>
+    </view>
 
-      <p class="text-center">红娘微信号： <span>jiaguang1991</
-      span></p>
+    <view>
+      <p class="text-center">我们提供严肃的婚姻介绍服务</p>
+      <p class="text-center">红娘希望你诚信填写个人信息</p>
+      <p class="text-center">...</p>
+    </view>
 
-      <view class="weui-cell weui-cell_input">
-            <view class="weui-cell__hd">
-              <view class="weui-label">籍贯</view>
-            </view>
-            <view class="weui-cell">
-              <picker name="hometown" mode="region" value="{{region}}" bindchange="bindRegionChange">
-                <view class="weui-input">{{region[0]}}，{{region[1]}}，{{region[2]}}</view>
-              </picker>
-            </view>
-          </view>
+    <view>
+        <p class="text-center">当你找到感兴趣的他／她</p>
+        <p class="text-center">请添加任意一位红娘微信</p>
+        <p class="text-center">发送自己和那位的编号</p>
+        <p class="text-center">提出你想知道的</p>
+        <p class="text-center">...</p>
+      </view>
+
+      <view>
+          <p class="text-center">红娘将征求他／她的态度</p>
+          <p class="text-center">进一步发展，还是</p>
+          <p class="text-center">...</p>
+        </view>
+
+    <view>
+        <p class="text-center margin-top">最后祝你在这里找到另一半～
+          </p>
+      <p class="text-center margin-top">红娘微信号-周阿姨：
+        <span>jiaguang1991</span>
+      </p>
+      <p class="text-center">红娘微信号-周叔叔：
+        <span>lc613055</span>
+      </p>
+    </view>
+    <!-- <view class="intro">
+        <view>欢迎来到甘塘角婚介</view>
+        <view>这是一款严肃的小程序</view>
+        <view>红娘希望你</view>
+
+      </view>
+      <view>
+        <view>
+
+        </view>
+      </view> -->
   </view>
 </view>
-

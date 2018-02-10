@@ -17,8 +17,13 @@ image{
     text-align: center;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 2px;
 }
 
 .text-center span{
     font-weight: bold
+}
+
+.margin-top{
+    margin-top: 30px;
 }

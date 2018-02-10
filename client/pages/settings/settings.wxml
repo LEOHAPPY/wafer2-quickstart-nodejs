@@ -1,6 +1,6 @@
 <view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
   <view class="page__bd">
-    <view class="weui-cells__title" style="text-align: center">{{userAppID>0 ? ("我-#" + userAppID): '我的信息'}}</view>
+    <!-- <view class="weui-cells__title" style="text-align: center">{{userAppID>0 ? ("我-#" + userAppID): '我的信息'}}</view> -->
 
     <form bindsubmit="formSubmit" bindreset="formReset" wx:if="{{userAppID<0}}">
       <view class="weui-cells weui-cells_after-title">
@@ -201,7 +201,7 @@
             <slider name="weight" show-value min='30' max='200' value='50'></slider>
           </view> -->
 
-          <view class="weui-cell weui-cell_input">
+          <view class="weui-cell weui-cell_input bottom-border">
             <view class="weui-cell__hd">
               <view class="weui-label">出生年月</view>
             </view>
