@@ -20,7 +20,7 @@
                 <span class="">{{item.userName}}</span>
                 <span class="">{{item.astro}}</span>
                 <span class="wrapper">{{item.age}}</span>
-                <span class="wrapper">{{item.height}}</span>
+                <span class="wrapper">{{item.height}}cm</span>
               </view>
 
               <view class="info padding-top">
@@ -47,7 +47,7 @@
                 <span class="">{{item.userName}}</span>
                 <span class="">{{item.astro}}</span>
                 <span class="wrapper">{{item.age}}</span>
-                <span class="wrapper">{{item.height}}</span>
+                <span class="wrapper">{{item.height}}cm</span>
               </view>
 
               <view class="info padding-top">
@@ -67,33 +67,5 @@
         </view>
       </view>
     </view>
-
-
-    <!-- <view class="weui-cells__title" style="text-align: center">信息列表</view>
-
-    <view class="weui-cell" wx:for="{{personList}}">
-      <view bindtap='openPerson' id='{{index}}'>
-        <view class="info">
-          <span class="">#{{item.id}}</span>
-          <span class="">{{item.userName}}</span>
-          <span class="">双子</span>
-          <span class="wrapper">{{dateNow}}</span>
-          <span class="wrapper">{{item.height}}</span>
-        </view>
-
-        <view class="info padding-top">
-          <span class="">{{item.degreeLevel}}</span>
-          <span class="">{{item.career}}</span>
-          <span class="">{{item.workplace}}</span>
-        </view>
-
-
-        <view class="comments">
-          <view>{{item.selfWish}}</view>
-        </view>
-
-      </view>
-
-    </view> -->
   </view>
 </view>

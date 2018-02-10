@@ -78,9 +78,6 @@ Page({
         });
       }
     });
-
-    //todo 
-    //get user info if gender == "nan" => activeIndex == 0 else => ==1
   },
 
   openPerson: function (e) {

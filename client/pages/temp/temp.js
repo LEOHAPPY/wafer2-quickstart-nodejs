@@ -13,19 +13,9 @@ var that;
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.getStorage({
-      key: '_userInfo',
-      success: function (res) {
-        wx.switchTab({
-          url: '../personList/personList',
-        })
-      },
-      fail:function(res){
-        wx.switchTab({
-            url: '../hongNiang/hongNiang',
-        })
-      }
-    });
+    that =  this;
+    // that.checkUserInfo();
+    
   },
 
   /**
@@ -39,7 +29,24 @@ var that;
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    that.checkUserInfo();
+    
+  },
+
+  checkUserInfo(){
+    wx.getStorage({
+      key: '_userInfo',
+      success: function (res) {
+        wx.switchTab({
+          url: '../personList/personList',
+        })
+      },
+      fail:function(res){
+        wx.switchTab({
+            url: '../hongNiang/hongNiang',
+        })
+      }
+    });
   },
 
   /**

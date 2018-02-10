@@ -14,7 +14,7 @@
 
 
     <view>
-      <p class="text-center">我们提供严肃的婚姻介绍服务</p>
+      <!-- <p class="text-center">我们提供严肃的婚姻介绍服务</p> -->
       <p class="text-center">红娘希望你诚信填写个人信息</p>
       <p class="text-center">...</p>
     </view>
@@ -23,7 +23,7 @@
         <p class="text-center">当你找到感兴趣的他／她</p>
         <p class="text-center">请添加任意一位红娘微信</p>
         <p class="text-center">发送自己和那位的编号</p>
-        <p class="text-center">提出你想知道的</p>
+        <!-- <p class="text-center">提出你想知道的</p> -->
         <p class="text-center">...</p>
       </view>
 
@@ -34,7 +34,7 @@
         </view>
 
     <view>
-        <p class="text-center margin-top">最后祝你在这里找到另一半
+        <p class="text-center margin-top">祝你在这里找到另一半
           </p>
       <p class="text-center" style='margin-top: 10px'>周阿姨微信ID：
         <span>jiaguang1991</span>
@@ -46,3 +46,4 @@
   </view>
   </view>
 </view>
+
