@@ -18,8 +18,8 @@
               <view class="info">
                 <span class="">#{{item.id}}</span>
                 <span class="">{{item.userName}}</span>
-                <span class="">双子</span>
-                <span class="wrapper">{{dateNow}}</span>
+                <span class="">{{item.astro}}</span>
+                <span class="wrapper">{{item.age}}</span>
                 <span class="wrapper">{{item.height}}</span>
               </view>
 
@@ -45,8 +45,8 @@
               <view class="info">
                 <span class="">#{{item.id}}</span>
                 <span class="">{{item.userName}}</span>
-                <span class="">双子</span>
-                <span class="wrapper">{{dateNow}}</span>
+                <span class="">{{item.astro}}</span>
+                <span class="wrapper">{{item.age}}</span>
                 <span class="wrapper">{{item.height}}</span>
               </view>
 

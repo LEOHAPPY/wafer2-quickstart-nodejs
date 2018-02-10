@@ -10,11 +10,9 @@ Page({
   data: {
     _userInfo: {},
 
-    personList: [],
     personListBoy: [],
     personListGirl: [],
     personDtl: [],
-    dateNow: 0,
 
     //navbar
     tabs: ["男生", "女生"],
@@ -60,14 +58,6 @@ Page({
       complete: function () {
         // complete
       }
-    })
-
-    //calculate this getFullYear
-    var d = new Date();
-    var n = d.getFullYear() - 1 - 1993;
-    console.log(n)
-    that.setData({
-      dateNow: n,
     })
   },
 
@@ -116,12 +106,11 @@ function getAllPerson() {
     method: 'get',
     success(result) {
       console.log('get personlist', result.data);
+      let personList = calInfoToPersonObject(result.data.personInfo);
       that.setData({
-        // personList: result.data.personInfo,
-        personListBoy: result.data.personInfo.filter(x => x.gender == "男"),
-        personListGirl: result.data.personInfo.filter(x => x.gender == "女")
+        personListBoy: personList.filter(x => x.gender == "男"),
+        personListGirl: personList.filter(x => x.gender == "女")
       });
-      // console.log('that.personList', that.data.personList);
       console.log('that.personListBoy', that.data.personListBoy);
       console.log('that.personListGirl', that.data.personListGirl);
 
@@ -132,6 +121,32 @@ function getAllPerson() {
       console.error('request fail', error);
     }
   });
+}
+
+function calInfoToPersonObject(personList) {
+  personList.forEach((person, index, arr) => {
+    person.age = getAge(person.birthday)
+    person.astro = getAstro(person.birthday)
+  });
+  console.log(personList)
+  return personList
+}
+
+function getAge(dateString) {
+  var today = new Date();
+  var birthDate = new Date(dateString);
+  var age = today.getFullYear() - birthDate.getFullYear();
+  var m = today.getMonth() - birthDate.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+  return age;
+}
+
+function getAstro(dateString) {
+  var m = dateString.split('-')[1]
+  var d = dateString.split('-')[2]
+  return "魔羯水瓶双鱼牡羊金牛双子巨蟹狮子处女天秤天蝎射手魔羯".substr(m * 2 - (d < "102223444433".charAt(m - 1) - -19) * 2, 2)
 }
 
 function getByIDPerson(id) {
