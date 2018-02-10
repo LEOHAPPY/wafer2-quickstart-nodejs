@@ -42,19 +42,14 @@
 
         <view class="weui-cell weui-cell_input">
           <view class="weui-cell__hd">
-            <view class="weui-label">身高</view>
+            <view class="weui-label">身高（厘米）</view>
           </view>
           <view class="weui-cell__bd">
             <input class="weui-input" type="text" placeholder="" name="height" value="{{personObj.height}}" disabled="true"></input>
           </view>
         </view>
 
-        <!-- <view class="page-section-title">体重(公斤)</view>
-          <view class="body-view">
-            <slider name="weight" show-value min='30' max='200' value='50'></slider>
-          </view> -->
-
-        <view class="weui-cell weui-cell_input">
+        <view class="weui-cell weui-cell_input bottom-border">
           <view class="weui-cell__hd">
             <view class="weui-label">出生年月</view>
           </view>
@@ -63,13 +58,9 @@
           </view>
         </view>
 
+        <view class="weui-cells__title">籍贯</view>
         <view class="weui-cell weui-cell_input">
-          <view class="weui-cell__hd">
-            <view class="weui-label">籍贯</view>
-          </view>
-          <view class="weui-cell__bd">
             <input class="weui-input" type="text" placeholder="" name="hometown" value="{{personObj.hometown}}" disabled="true"></input>
-          </view>
         </view>
 
         <view class="weui-cell weui-cell_input">
@@ -99,7 +90,7 @@
           </view>
         </view>
 
-        <view class="weui-cell weui-cell_input">
+        <view class="weui-cell weui-cell_input bottom-border">
           <view class="weui-cell__hd">
             <view class="weui-label">家中排行</view>
           </view>
@@ -109,20 +100,20 @@
         </view>
       </view>
 
-      <view class="weui-cells__title">介绍一下自己</view>
+      <view class="weui-cells__title">自我介绍一下～</view>
       <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell">
           <view class="weui-cell__bd">
-            <textarea style="height: 3em" name="selfIntro" placeholder="爱好/特长/生活态度" value='{{personObj.selfIntro}}' disabled="true" />
+            <textarea style="height: 4em" name="selfIntro" placeholder="兴趣爱好 | 性格特征 ..." value='{{personObj.selfIntro}}' disabled="true" />
           </view>
         </view>
       </view>
 
-      <view class="weui-cells__title">择偶要求</view>
+      <view class="weui-cells__title">心动条件</view>
       <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell">
           <view class="weui-cell__bd">
-            <textarea style="height: 3em" name="selfWish" placeholder="心中她/他的样子" value='{{personObj.selfWish}}' disabled="true" />
+            <textarea style="height: 4em" name="selfWish" placeholder="身高 | 年龄 | 性格 ..." value='{{personObj.selfWish}}' disabled="true" />
           </view>
         </view>
       </view>

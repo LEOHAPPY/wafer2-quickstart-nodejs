@@ -1,9 +1,10 @@
 {
   "pages": [
-    "pages/settings/settings",
+    "pages/temp/temp",
+    "pages/hongNiang/hongNiang",
     "pages/personList/personList",
-    "pages/personDtl/personDtl",
-    "pages/hongNiang/hongNiang"
+    "pages/settings/settings",
+    "pages/personDtl/personDtl"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -18,10 +19,10 @@
     "borderStyle": "white",
     "list": [
       {
-        "pagePath": "pages/settings/settings",
-        "text": "我",
-        "iconPath": "image/account.png",
-        "selectedIconPath": "image/account-g.png"
+        "pagePath": "pages/hongNiang/hongNiang",
+        "text": "红娘",
+        "iconPath": "image/service.png",
+        "selectedIconPath": "image/service-g.png"
       },
       {
         "pagePath": "pages/personList/personList",
@@ -30,10 +31,10 @@
         "selectedIconPath": "image/favorites-g.png"
       },
       {
-        "pagePath": "pages/hongNiang/hongNiang",
-        "text": "红娘",
-        "iconPath": "image/service.png",
-        "selectedIconPath": "image/service-g.png"
+        "pagePath": "pages/settings/settings",
+        "text": "我",
+        "iconPath": "image/account.png",
+        "selectedIconPath": "image/account-g.png"
       }
     ]
   }

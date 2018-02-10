@@ -29,7 +29,10 @@ var config = {
 
         getAllPerson: `${host}/weapp/getAllPerson`,
 
-        getByIDPerson: `${host}/weapp/getByIDPerson/`
+        getByIDPerson: `${host}/weapp/getByIDPerson/`,
+
+        getByOpenIDPerson: `${host}/weapp/getByOpenIDPerson/`
+
     }
 };
 

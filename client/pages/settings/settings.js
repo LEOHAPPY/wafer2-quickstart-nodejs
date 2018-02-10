@@ -7,13 +7,10 @@ Page({
   data: {
     genderArray: ['女', '男'],
     date: '1990-01-01',
-    region: ['湖南省', '邵阳县', '邵东县'],
+    region: ['湖南省', '邵阳市', '邵东县'],
     degreeLevel: ['小学', '初中', '高中', '本科', '硕士', '博士'],
-    brothers: ['无（独生）', '老大', '老二', '老三', '老四', '老五', '老六'],
-    requestResult: {
-      id: '',
-      msg: ''
-    },
+    brothers: ['独生', '老大', '老二', '老三', '老四', '老五', '老六'],
+    requestResult: '',
 
     userInfo: {},
     logged: false,
@@ -25,7 +22,9 @@ Page({
   onLoad: function (options) {
     that = this;
     // that.login();
-    that.checkAppID();
+    // that.checkAppID();
+    that.login();
+    //if 
   },
 
   gotoList() {
@@ -36,21 +35,24 @@ Page({
   },
 
   onShow: function () {
+    if(!that.data.logged){
+      that.login()
+    }
   },
 
   checkAppID() {
     //get personObj first, then userAppID
 
-    wx.getStorage({
-      key: 'personDtl',
-      success: function (res) {
-        console.log(res.data);
-        that.setData({
-          personObj: res.data
-        });
-      console.log('that.personObj', that.data.personObj)
-      },
-    });
+    // wx.getStorage({
+    //   key: 'personDtl',
+    //   success: function (res) {
+    //     console.log(res.data);
+    //     that.setData({
+    //       personObj: res.data
+    //     });
+    //     console.log('that.personObj', that.data.personObj)
+    //   },
+    // });
 
     wx.getStorage({
       key: 'userAppID',
@@ -72,15 +74,25 @@ Page({
       event.detail.value.hometown = JSON.stringify(event.detail.value.hometown).substr(1).slice(0, -1).replace(/\"/g, "");
 
       var personObject = event.detail.value;
-      console.log('personObj', personObject)
+      personObject.userInfo = JSON.stringify(that.data.userInfo);
+      personObject.openID = that.data.userInfo.openId;
+      console.log('personObj', personObject);
 
       addPersonInfo(personObject);
+
+      //save
+       wx.setStorage({
+        key: '_user',
+        data: objectPerson,
+      })
     } else {
       //trim id
       event.detail.value.id = event.detail.value.id.trim();
       console.log('event.detail.value', event.detail.value);
       var personObject = event.detail.value;
-      console.log('personObj update', personObject)
+      personObject.userInfo = JSON.stringify(that.data.userInfo);
+      personObject.openID = that.data.userInfo.openId;
+      console.log('personObj update', personObject);
 
       updatePersonInfo(personObject);
     }
@@ -129,6 +141,118 @@ Page({
     })
   },
 
+  login: function () {
+    if (this.data.logged) return
+
+    util.showBusy('')
+
+    // 调用登录接口
+    qcloud.login({
+      success(result) {
+        if (result) {
+          util.showSuccess('')
+          that.setData({
+            userInfo: result,
+            logged: true,
+          })
+          getByOpenIDPerson(that.data.userInfo.openId);
+          console.log('frist time login this userInfo',that.data.userInfo)
+        } else {
+          // 如果不是首次登录，不会返回用户信息，请求用户信息接口获取
+          qcloud.request({
+            url: config.service.requestUrl,
+            login: true,
+            success(result) {
+              util.showSuccess('')
+              that.setData({
+                userInfo: result.data.data,
+                logged: true,
+              })
+              console.log('second time login that.data.userInfo',that.data.userInfo)
+              getByOpenIDPerson(that.data.userInfo.openId);
+            },
+
+            fail(error) {
+              util.showModel('')
+              console.log('request fail', error)
+            }
+          })
+        }
+
+        
+      },
+
+      fail(error) {
+        util.showModel('')
+        that.showOpenAuthoModal()
+      }
+    })
+  },
+
+  showOpenAuthoModal(){
+    wx.showModal({
+      title: '授权提示',
+      content: '需要您的微信授权才能登记哦',
+      success: function(res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+          that.openSetting()
+          
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  },
+
+  openSetting: function () {
+    if (wx.openSetting) {
+      wx.openSetting({
+        success: function (res) {
+          console.log(res)
+          if(!res.authSetting["scope.userInfo"]){
+            
+          }else{
+            that.login()
+          }
+
+        }
+      })
+    }
+  },
+  // 切换是否带有登录态
+  switchRequestMode: function (e) {
+    this.setData({
+      takeSession: e.detail.value
+    })
+    this.doRequest()
+  },
+
+  doRequest: function () {
+    util.showBusy('请求中...')
+    var that = this
+    var options = {
+      url: config.service.requestUrl,
+      login: true,
+      success(result) {
+        util.showSuccess('请求成功完成')
+        console.log('request success', result)
+        that.setData({
+          requestResult: JSON.stringify(result.data)
+        })
+      },
+      fail(error) {
+        util.showModel('请求失败', error);
+        console.log('request fail', error);
+      }
+    }
+    if (this.data.takeSession) {  // 使用 qcloud.request 带登录态登录
+      qcloud.request(options)
+    } else {    // 使用 wx.request 则不带登录态
+      wx.request(options)
+    }
+  },
+
 });
 
 function updatePersonInfo(objectPerson) {
@@ -146,15 +270,20 @@ function updatePersonInfo(objectPerson) {
       wx.pageScrollTo({
         scrollTop: 0
       })
-      util.showSuccess('')
+      util.showSuccess('更新成功')
 
-      wx.setStorage({
-        key: 'personDtl',
-        data: objectPerson,
-      })
+      // wx.setStorage({
+      //   key: 'personDtl',
+      //   data: objectPerson,
+      // })
 
       that.setData({
         personObj: objectPerson
+      })
+
+      wx.setStorage({
+        key: '_userInfo',
+        data: objectPerson,
       })
 
     },
@@ -180,13 +309,13 @@ function addPersonInfo(objectPerson) {
       wx.pageScrollTo({
         scrollTop: 0
       })
-      util.showSuccess('编号' + result.data.id)
+      util.showSuccess('登记成功')
       wx.setStorage({
         key: 'userAppID',
         data: result.data.id,
       })
       wx.setStorage({
-        key: 'personDtl',
+        key: '_userInfo',
         data: objectPerson,
       })
       that.setData({
@@ -200,4 +329,37 @@ function addPersonInfo(objectPerson) {
       console.log('request fail', error);
     }
   })
+}
+
+function getByOpenIDPerson(id) {
+  if(!id){
+    that.setData({
+      userAppID: -1
+    });
+  }else{
+    // util.showBusy('');
+    wx.request({
+      url: config.service.getByOpenIDPerson + id,
+      method: 'get',
+      success(result) {
+        console.log('get personDtl', result.data);
+        that.setData({
+          personDtl: result.data.personInfo,
+          userAppID: result.data.personInfo[0].id,
+          personObj: result.data.personInfo[0]
+        });
+        console.log('that.personDtl', that.data.personDtl);
+        // util.showSuccess('');
+      },
+      fail(error) {
+        // util.showModel('请求失败', error);
+        console.error('request fail', error);
+        that.setData({
+          userAppID: -1
+        });
+      }
+    });
+  }
+  
+  
 }
