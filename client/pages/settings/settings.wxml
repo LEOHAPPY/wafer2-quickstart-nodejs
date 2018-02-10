@@ -112,20 +112,20 @@
             </view>
           </view>
 
-          <view class="weui-cells__title">介绍一下自己</view>
+          <view class="weui-cells__title">自我介绍一下～</view>
           <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell">
               <view class="weui-cell__bd">
-                <textarea style="height: 3em" name="selfIntro" placeholder="爱好/特长/生活态度" />
+                <textarea style="height: 4em" name="selfIntro" placeholder="兴趣爱好 | 性格特征 ..." />
               </view>
             </view>
           </view>
 
-          <view class="weui-cells__title">择偶要求</view>
+          <view class="weui-cells__title">心动条件</view>
           <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell">
               <view class="weui-cell__bd">
-                <textarea style="height: 3em" name="selfWish" placeholder="心中她/他的样子" />
+                <textarea style="height: 4em" name="selfWish" placeholder="身高 | 年龄 | 性格 ..." />
               </view>
             </view>
           </view>

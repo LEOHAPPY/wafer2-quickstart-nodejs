@@ -1,18 +1,33 @@
+var that;
 
-
-Page({
+  Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+  
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.getStorage({
+      key: '_userInfo',
+      success: function (res) {
+        wx.switchTab({
+          url: '../personList/personList',
+        })
+      },
+      fail:function(res){
+        wx.switchTab({
+            url: '../hongNiang/hongNiang',
+        })
+      }
+    });
   },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -24,6 +39,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+  
   },
 
   /**

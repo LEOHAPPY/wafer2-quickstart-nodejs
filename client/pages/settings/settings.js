@@ -35,6 +35,9 @@ Page({
   },
 
   onShow: function () {
+    if(!that.data.logged){
+      that.login()
+    }
   },
 
   checkAppID() {
@@ -76,6 +79,12 @@ Page({
       console.log('personObj', personObject);
 
       addPersonInfo(personObject);
+
+      //save
+       wx.setStorage({
+        key: '_user',
+        data: objectPerson,
+      })
     } else {
       //trim id
       event.detail.value.id = event.detail.value.id.trim();
@@ -174,12 +183,43 @@ Page({
       },
 
       fail(error) {
-        // util.showModel('登录失败', error)
-        console.log('登录失败', error)
+        util.showModel('')
+        that.showOpenAuthoModal()
       }
     })
   },
 
+  showOpenAuthoModal(){
+    wx.showModal({
+      title: '授权提示',
+      content: '需要您的微信授权才能登记哦',
+      success: function(res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+          that.openSetting()
+          
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  },
+
+  openSetting: function () {
+    if (wx.openSetting) {
+      wx.openSetting({
+        success: function (res) {
+          console.log(res)
+          if(!res.authSetting["scope.userInfo"]){
+            
+          }else{
+            that.login()
+          }
+
+        }
+      })
+    }
+  },
   // 切换是否带有登录态
   switchRequestMode: function (e) {
     this.setData({
@@ -230,7 +270,7 @@ function updatePersonInfo(objectPerson) {
       wx.pageScrollTo({
         scrollTop: 0
       })
-      util.showSuccess('')
+      util.showSuccess('更新成功')
 
       // wx.setStorage({
       //   key: 'personDtl',
@@ -239,6 +279,11 @@ function updatePersonInfo(objectPerson) {
 
       that.setData({
         personObj: objectPerson
+      })
+
+      wx.setStorage({
+        key: '_userInfo',
+        data: objectPerson,
       })
 
     },
@@ -264,15 +309,15 @@ function addPersonInfo(objectPerson) {
       wx.pageScrollTo({
         scrollTop: 0
       })
-      util.showSuccess('编号' + result.data.id)
+      util.showSuccess('登记成功')
       wx.setStorage({
         key: 'userAppID',
         data: result.data.id,
       })
-      // wx.setStorage({
-      //   key: 'personDtl',
-      //   data: objectPerson,
-      // })
+      wx.setStorage({
+        key: '_userInfo',
+        data: objectPerson,
+      })
       that.setData({
         requestResult: result.data,
         userAppID: result.data.id,

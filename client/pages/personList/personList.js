@@ -4,9 +4,12 @@ var util = require('../../utils/util.js');
 var that;
 
 var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
+var enterCounter = 0;
 
 Page({
   data: {
+    _userInfo: {},
+
     personList: [],
     personListBoy: [],
     personListGirl: [],
@@ -27,11 +30,38 @@ Page({
   },
 
   onShow: function () {
-    getAllPerson();
+    enterCounter++;
+
+    if (enterCounter == 1) {
+      util.showBusy('')
+      getAllPerson();
+      util.showBusy('')
+    } else {
+      getAllPerson();
+    }
     // getByIDPerson(102)
   },
 
   initialData() {
+    wx.getStorage({
+      key: '_userInfo',
+      success: function (res) {
+        console.log(res.data)
+        if (res.data.gender == "男") {
+          that.setData({
+            activeIndex: 1,
+          })
+          that.setTabData()
+        }
+      },
+      fail: function () {
+        // fail
+      },
+      complete: function () {
+        // complete
+      }
+    })
+
     //calculate this getFullYear
     var d = new Date();
     var n = d.getFullYear() - 1 - 1993;
@@ -95,7 +125,7 @@ function getAllPerson() {
       console.log('that.personListBoy', that.data.personListBoy);
       console.log('that.personListGirl', that.data.personListGirl);
 
-      // util.showSuccess('');
+      if (enterCounter == 1) util.showSuccess('');
     },
     fail(error) {
       // util.showModel('请求失败',error);

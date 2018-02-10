@@ -1,9 +1,10 @@
 {
   "pages": [
-    "pages/personList/personList",    
+    "pages/temp/temp",
+    "pages/hongNiang/hongNiang",
+    "pages/personList/personList",
     "pages/settings/settings",
-    "pages/personDtl/personDtl",
-    "pages/hongNiang/hongNiang"
+    "pages/personDtl/personDtl"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

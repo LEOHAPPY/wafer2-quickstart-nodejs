@@ -4,11 +4,14 @@
     <!-- <view class="weui-cells__title" style="text-align: center">红娘信息</view> -->
 
     <!-- <image class="qrCode-image" src="{{'../../image/QRCode.png'}}"></image> -->
+    <view >
+  
     <view>
       <p class="text-center" style="margin-bottom: 10px">
         <span>欢迎来到甘塘角婚介</span>
       </p>
     </view>
+
 
     <view>
       <p class="text-center">我们提供严肃的婚姻介绍服务</p>
@@ -26,20 +29,22 @@
 
       <view>
           <p class="text-center">红娘将征求他／她的态度</p>
-          <p class="text-center">进一步发展，还是</p>
+          <p class="text-center">是进一步发展，还是</p>
           <p class="text-center">...</p>
         </view>
 
     <view>
-        <p class="text-center margin-top">最后祝你在这里找到另一半～
+        <p class="text-center margin-top">最后祝你在这里找到另一半
           </p>
-      <p class="text-center margin-top">红娘微信号-周阿姨：
+      <p class="text-center" style='margin-top: 10px'>周阿姨：
         <span>jiaguang1991</span>
       </p>
-      <p class="text-center">红娘微信号-周叔叔：
+      <p class="text-center">周叔叔：
         <span>lc613055</span>
       </p>
     </view>
+  </view>
+    
     <!-- <view class="intro">
         <view>欢迎来到甘塘角婚介</view>
         <view>这是一款严肃的小程序</view>
